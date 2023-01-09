@@ -6,7 +6,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MyFirstTimerRoute extends RouteBuilder {
 
     @Autowired
@@ -26,6 +26,7 @@ public class MyFirstTimerRoute extends RouteBuilder {
        .log("${body}") //Time now is....
        .bean(loggingComponent)
        .log("${body}") //SimpleLoggingProcessingComponent....
+       .process(new SimpleLoggingProcessor()) //Process é a mesma coisa que o bean acima, porem utilizamos o bean quando ele é um bean em si, caso utilize uma classe normal, utiliza o process.
        .to("log:first-timer");
         
     }
