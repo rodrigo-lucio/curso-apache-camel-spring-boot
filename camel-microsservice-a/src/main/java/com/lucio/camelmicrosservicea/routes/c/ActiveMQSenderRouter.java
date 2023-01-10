@@ -4,7 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActiveMQSenterRouter extends RouteBuilder {
+public class ActiveMQSenderRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
@@ -20,6 +20,11 @@ public class ActiveMQSenterRouter extends RouteBuilder {
         from("file:files/json")
         .log("${body}")
         .to("activemq:my-activemq-queue");
+        
+        //Tambem xml
+        from("file:files/xml")
+        .log("${body}")
+        .to("activemq:my-activemq-xml-queue");
     }
 
 }
