@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActiveMQSenderRouter extends RouteBuilder {
 
+    
     @Override
     public void configure() throws Exception {
         // from("timer:active-mq-timer?period=10000") //10s
