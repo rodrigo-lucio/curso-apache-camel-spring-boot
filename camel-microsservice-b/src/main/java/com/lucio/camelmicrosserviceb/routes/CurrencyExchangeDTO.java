@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CurrencyExchange {
+public class CurrencyExchangeDTO {
     
     private Long id;
     private String from;
