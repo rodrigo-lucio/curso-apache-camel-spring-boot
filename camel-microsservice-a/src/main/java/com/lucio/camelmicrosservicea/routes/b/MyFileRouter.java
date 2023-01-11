@@ -1,11 +1,15 @@
 package com.lucio.camelmicrosservicea.routes.b;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MyFileRouter extends RouteBuilder {
 
+    @Autowired
+    private DeciderBean deciderBean;
+    
     @Override
     public void configure() throws Exception {
 
@@ -16,8 +20,9 @@ public class MyFileRouter extends RouteBuilder {
         .choice() //Content Based Routing
             .when(simple("${file:ext} == 'xml'"))
                 .log("XML FILE")
-            .when(simple("${body} contains 'USD'"))
-                .log("Not an XML FILE BUT contains USD")
+            //.when(simple("${body} contains 'USD'")) Caso a regra de negócio for mais complexa, fica melhor direcionar para uma classe que tenha um método boolean
+            .when(method(deciderBean))
+                .log("Not an XML FILE but return true from metod isCondition of the DeciderBean class")
             .otherwise()
                 .log("Not an XML FILE")
         .end()
