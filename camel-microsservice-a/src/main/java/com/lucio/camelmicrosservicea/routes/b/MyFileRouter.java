@@ -20,7 +20,7 @@ public class MyFileRouter extends RouteBuilder {
         .choice() //Content Based Routing
             .when(simple("${file:ext} == 'xml'"))
                 .log("XML FILE")
-            //.when(simple("${body} contains 'USD'")) Caso a regra de negócio for mais complexa, fica melhor direcionar para uma classe que tenha um método boolean
+            //.when(simple("${body} contains 'USD'")) Caso a regra de negócio for mais complexa, fica melhor direcionar para uma classe que tenha um método boolean, ai utiliza o Java normalmente e nao a linguagem do camel
             .when(method(deciderBean))
                 .log("Not an XML FILE but return true from metod isCondition of the DeciderBean class")
             .otherwise()
