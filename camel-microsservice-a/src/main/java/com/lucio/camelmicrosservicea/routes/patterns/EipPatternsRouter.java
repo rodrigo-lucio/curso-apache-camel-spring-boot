@@ -3,6 +3,7 @@ package com.lucio.camelmicrosservicea.routes.patterns;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class EipPatternsRouter extends RouteBuilder {
 
@@ -14,6 +15,12 @@ public class EipPatternsRouter extends RouteBuilder {
         .to("activemq:my-activemq-queue-pattern-1", 
                 "activemq:my-activemq-queue-pattern-2",
                 "activemq:my-activemq-queue-pattern-3");
+        
+        from("file:files/csv")
+        .unmarshal().csv()
+        .split(body())
+        .to("activemq:my-activemq-csv-queue");
+        
         
     }
 
