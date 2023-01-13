@@ -16,11 +16,14 @@ public class RestApiConsumerServiceBRouter extends RouteBuilder {
     
     @Override
     public void configure() throws Exception {
-        //Fica a cada 10segundos lendo o localhost:8081/currency-exchange/from/a/to/b do serviço B
-        
+        //Fica a cada X segundos lendo o localhost:8081/currency-exchange/from/a/to/b do serviço B
         restConfiguration().host("localhost").port(8081);
         
-        from("timer:rest-api-consumer?period={{time-period-default}}") //period-default-routes: definido no application.yml. podemos fazer isso em qualquer lugar
+        //Caso queira jogar o erro para uma dead letter. Ai assim nao fica dando erro no console caso o endpoint estiver fora
+        errorHandler(deadLetterChannel("activemq:dead-letter-queue"));
+        
+        //period-default-routes: tempo em millisegundos definido no application.yml. podemos fazer isso em qualquer lugar
+        from("timer:rest-api-consumer?period={{time-period-default}}") 
         .to("rest:get:/currency-exchange/from/USD/to/BRL")
         .log("${body}")
         .unmarshal().json(JsonLibrary.Jackson, CurrencyExchangeDTO.class)
