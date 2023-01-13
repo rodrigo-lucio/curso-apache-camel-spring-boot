@@ -6,6 +6,11 @@ camel:
   component:
     kafka:
       brokers: localhost:9092
+#    activemq:
+#      username: admin  
+#      password: admin
+     
+     
       
-# Parâmetros para customizar o camel como quiser      
+# Parâmetros para customizar as rotas do camel como quiser e não precisar ficar alterando em código      
 time-period-default: 5000
