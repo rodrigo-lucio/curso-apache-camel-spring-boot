@@ -50,7 +50,12 @@
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-http-starter</artifactId>
 			<version>${camel.version}</version>
-		</dependency>		
+		</dependency>	
+		<dependency> 
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-csv-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>			
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
