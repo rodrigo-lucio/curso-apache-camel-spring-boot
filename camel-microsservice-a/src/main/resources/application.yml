@@ -6,3 +6,6 @@ camel:
   component:
     kafka:
       brokers: localhost:9092
+      
+# Parâmetros para customizar o camel como quiser      
+time-period-default: 5000

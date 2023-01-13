@@ -20,7 +20,7 @@ public class RestApiConsumerServiceBRouter extends RouteBuilder {
         
         restConfiguration().host("localhost").port(8081);
         
-        from("timer:rest-api-consumer?period=10000")
+        from("timer:rest-api-consumer?period={{time-period-default}}") //period-default-routes: definido no application.yml. podemos fazer isso em qualquer lugar
         .to("rest:get:/currency-exchange/from/USD/to/BRL")
         .log("${body}")
         .unmarshal().json(JsonLibrary.Jackson, CurrencyExchangeDTO.class)
